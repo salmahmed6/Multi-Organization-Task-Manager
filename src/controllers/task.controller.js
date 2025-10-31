@@ -7,18 +7,46 @@ export const createTask = async (req, res) => {
     const { title, description, projectId, assigneeId } = req.body;
     const organizationId = req.user.organizationId;
 
-    // Verify project belongs to the same organization
-    const project = await prisma.project.findUnique({ where: { id: projectId } });
-    if (!project || project.organizationId !== organizationId)
-      return res.status(403).json({ message: "You cannot assign tasks to this project" });
-
-    const task = await prisma.task.create({
-      data: { title, description, projectId, assigneeId },
+    //Verify project belongs to the same organization
+    const project = await prisma.project.findUnique({
+      where: { id: projectId },
     });
 
-    res.status(201).json({ message: "Task created successfully", task });
+    if (!project || project.organizationId !== organizationId) {
+      return res
+        .status(403)
+        .json({ message: "You cannot assign tasks to this project" });
+    }
+
+    //Create the new task
+    const task = await prisma.task.create({
+      data: {
+        title,
+        description,
+        projectId,
+        assigneeId,
+      },
+    });
+
+    //Create a notification for the assignee
+    await prisma.notification.create({
+      data: {
+        userId: assigneeId,
+        message: `You have been assigned a new task: ${title}`,
+      },
+    });
+
+    //Send success response
+    res.status(201).json({
+      message: "Task created successfully",
+      task,
+    });
   } catch (error) {
-    res.status(500).json({ message: "Failed to create task", error: error.message });
+    console.error("Error creating task:", error);
+    res.status(500).json({
+      message: "Failed to create task",
+      error: error.message,
+    });
   }
 };
 
@@ -94,5 +122,41 @@ export const deleteTask = async (req, res) => {
     res.json({ message: "Task deleted successfully" });
   } catch (error) {
     res.status(500).json({ message: "Failed to delete task", error: error.message });
+  }
+};
+
+// Get all tasks with pagination and filtering
+export const getAllTasks = async (req, res) => {
+  try {
+    const { organizationId, role, id: userId } = req.user;
+    const { page = 1, limit = 10, title, status, assignee } = req.query;
+
+    const skip = (page - 1) * limit;
+    const where = {
+      project: { organizationId },
+      ...(title && { title: { contains: title, mode: "insensitive" } }),
+      ...(status && { status }),
+      ...(assignee && { assignee: { name: { contains: assignee, mode: "insensitive" } } }),
+      ...(role === "employee" ? { assigneeId: userId } : {}),
+    };
+
+    const [tasks, total] = await Promise.all([
+      prisma.task.findMany({
+        where,
+        skip: Number(skip),
+        take: Number(limit),
+        include: { project: true, assignee: true },
+      }),
+      prisma.task.count({ where }),
+    ]);
+
+    res.status(200).json({
+      total,
+      currentPage: Number(page),
+      totalPages: Math.ceil(total / limit),
+      tasks,
+    });
+  } catch (error) {
+    res.status(500).json({ message: "Failed to fetch tasks", error: error.message });
   }
 };
