@@ -31,6 +31,7 @@ model User {
   organization   Organization? @relation(fields: [organizationId], references: [id], onDelete: Cascade)
   tasks          Task[]
   files          File[]   @relation("UserFiles") 
+  notifications  Notification[]
   createdAt      DateTime @default(now())
 }
 
@@ -74,4 +75,13 @@ model File {
   taskId       Int?
   task         Task?      @relation("TaskFiles", fields: [taskId], references: [id])       
   createdAt    DateTime   @default(now())
+}
+
+model Notification {
+  id          Int      @id @default(autoincrement())
+  message     String
+  userId      Int
+  user        User     @relation(fields: [userId], references: [id])
+  isRead      Boolean  @default(false)
+  createdAt   DateTime @default(now())
 }
