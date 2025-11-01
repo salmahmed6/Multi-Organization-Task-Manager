@@ -28,6 +28,15 @@ A RESTful API system for managing tasks, projects, and users across multiple org
 - **Admin:** Can manage organization, users, projects, tasks, and view stats  
 - **Employee:** Can view & update assigned tasks, upload files, view notifications  
 
+## Environment Variables
+Create a .env file in the project root and add the following sensitive variables:
+```
+DATABASE_URL=
+JWT_SECRET=
+CLOUDINARY_CLOUD_NAME=
+CLOUDINARY_API_KEY=
+CLOUDINARY_API_SECRET=
+```
 ## Setup Instructions
 ```bash
 git clone https://github.com/your-username/multi-org-task-manager.git
