@@ -98,3 +98,34 @@ export const getOrganizationById = async (req, res) => {
     });
   }
 };
+
+// Get organization statistics (Admin only)
+export const getOrganizationStats = async (req, res) => {
+  try {
+    const { organizationId, role } = req.user;
+
+    if (role !== "admin") {
+      return res.status(403).json({ message: "Access denied" });
+    }
+
+    const [employeeCount, projectCount, completedTasks] = await Promise.all([
+      prisma.user.count({ where: { organizationId } }),
+      prisma.project.count({ where: { organizationId } }),
+      prisma.task.count({
+        where: {
+          project: { organizationId },
+          status: "done",
+        },
+      }),
+    ]);
+
+    res.status(200).json({
+      organizationId,
+      employeeCount,
+      projectCount,
+      completedTasks,
+    });
+  } catch (error) {
+    res.status(500).json({ message: "Failed to fetch organization stats", error: error.message });
+  }
+};
