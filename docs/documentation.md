@@ -1,4 +1,4 @@
-# Multi-Org Task Manager
+# Multi-Org Task Manager – Technical Documentation
 
 ## Overview
 A RESTful API system for managing tasks, projects, and users across multiple organizations with role-based access, file uploads, and real-time notifications.
@@ -23,3 +23,16 @@ A RESTful API system for managing tasks, projects, and users across multiple org
 5. **File Upload System** — File upload & storage using Cloudinary  
 6. **Notifications System** — Alerts for new task assignments  
 7. **Bonus Features** — Search, pagination, role changes, analytics  
+
+## Roles
+- **Admin:** Can manage organization, users, projects, tasks, and view stats  
+- **Employee:** Can view & update assigned tasks, upload files, view notifications  
+
+## Setup Instructions
+```bash
+git clone https://github.com/your-username/multi-org-task-manager.git
+cd multi-org-task-manager
+npm install
+npx prisma db push
+npm run dev
+```
