@@ -36,3 +36,7 @@ npm install
 npx prisma db push
 npm run dev
 ```
+
+## Production Deployment
+Base API URL (Production):
+``` https://multi-organization-task-manager-58f.vercel.app/api ```
