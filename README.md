@@ -1,46 +1,25 @@
-multi-org-task-manager/
-├── src/
-│   ├── config/
-│   │   ├── database.js
-│   │   └── cloudStorage.js
-│   ├── middleware/
-│   │   ├── auth.js
-│   │   ├── authorization.js
-│   │   ├── errorHandler.js
-│   │   └── upload.js
-│   ├── routes/
-│   │   ├── auth.routes.js
-│   │   ├── organization.routes.js
-│   │   ├── project.routes.js
-│   │   ├── task.routes.js
-│   │   └── file.routes.js
-│   ├── controllers/
-│   │   ├── auth.controller.js
-│   │   ├── organization.controller.js
-│   │   ├── project.controller.js
-│   │   ├── task.controller.js
-│   │   └── file.controller.js
-│   ├── services/
-│   │   ├── auth.service.js
-│   │   ├── organization.service.js
-│   │   ├── project.service.js
-│   │   ├── task.service.js
-│   │   ├── file.service.js
-│   │   └── notification.service.js (bonus)
-│   ├── utils/
-│   │   ├── jwt.js
-│   │   ├── validators.js
-│   │   └── constants.js
-│   └── index.js
-├── prisma/
-│   ├── schema.prisma
-│   └── migrations/
-├── tests/
-│   ├── auth.test.js
-│   ├── project.test.js
-│   └── task.test.js
-├── .env.example
-├── .gitignore
-├── package.json
-├── README.md
-we need to update the structure to be like this send the command please 
+# Multi-Org Task Manager
+
+## Overview
+A RESTful API system for managing tasks, projects, and users across multiple organizations with role-based access, file uploads, and real-time notifications.
+
+## Tech Stack
+| Layer | Technology |
+|-------|-------------|
+| Runtime | Node.js |
+| Framework | Express.js |
+| Database | PostgreSQL |
+| ORM | Prisma |
+| Authentication | JWT (JSON Web Token) |
+| File Storage | Cloudinary |
+| Deployment | Vercel |
+| Version Control | GitHub |
+
+## Core Modules
+1. **Authentication** — Register & Login endpoints with JWT auth  
+2. **Organization Management** — CRUD and employee invitation system  
+3. **Project Management** — Scoped project operations per organization  
+4. **Task Management** — Role-based task creation and assignment  
+5. **File Upload System** — File upload & storage using Cloudinary  
+6. **Notifications System** — Alerts for new task assignments  
+7. **Bonus Features** — Search, pagination, role changes, analytics  
