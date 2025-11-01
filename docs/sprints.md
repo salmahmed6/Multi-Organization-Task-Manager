@@ -1,0 +1,11 @@
+# Project Sprints Overview – Multi-Org Task Manager
+
+| Sprint | Description | Objectives | Deliverables | Estimated Time |
+|--------|-------------|------------|--------------|----------------|
+| **Sprint 1** | Project Setup & Authentication | - Initialize project structure<br>- Set up database and ORM<br>- Implement authentication system | - Project repository with proper structure<br>- Database schema designed and migrated<br>- JWT authentication endpoints (register, login)<br>- User roles implementation (admin, employee)<br>- Environment configuration | 1 hour |
+| **Sprint 2** | Organizations & Authorization | - Implement organization management<br>- Set up authorization middleware<br>- Ensure data isolation between organizations | - Organization CRUD endpoints<br>- Authorization middleware<br>- Admin-only organization management<br>- Employee invitation system | 2 hours |
+| **Sprint 3** | Projects Management | - Implement project management within organizations<br>- Set up project-organization relationships | - Project CRUD endpoints<br>- Admin-only project creation<br>- Organization-scoped project listing | 30 mins |
+| **Sprint 4** | Task Management | - Implement task management system<br>- Set up task assignment and status updates<br>- Implement role-based task permissions | - Task CRUD endpoints<br>- Task assignment to employees<br>- Status update functionality<br>- Role-based access control for tasks | 30 mins |
+| **Sprint 5** | File Upload System | - Implement file upload functionality<br>- Integrate cloud storage<br>- Link files to projects and tasks | - File upload endpoint<br>- Cloud storage integration (S3/Cloudinary)<br>- File metadata storage in database<br>- File-project/task relationships | 1 hour |
+| **Sprint 6** | Bonus Features | - Implement additional features<br>- Enhance API functionality | - Organization statistics endpoint<br>- Task pagination and search<br>- Role change functionality<br>- Notification system (big bonus) | 1 hour |
+| **Sprint 7** | Deployment & Documentation | - Deploy API to production<br>- Complete documentation<br>- Final testing | - Live API on Vercel/Render<br>- Complete GitHub repository with README<br>- API documentation<br>- Postman collection | 2 hours |
