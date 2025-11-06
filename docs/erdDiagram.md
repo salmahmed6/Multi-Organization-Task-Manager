@@ -1,3 +1,4 @@
+```mermaid
 erDiagram
     Organization ||--o{ User : "has"
     Organization ||--o{ Project : "contains"
@@ -75,3 +76,4 @@ erDiagram
         boolean isRead "default: false"
         datetime createdAt
     }
+```
